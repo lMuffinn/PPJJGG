@@ -3,6 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
+
+
+
+
+
+
+
+
+
+//DO NOT USE! this is the origional ai, it is bad. maybe for your team but otherwise no.
+
+
+
+
+
+
+
+
+
+
+
+
+
 public class EnemyAI : MonoBehaviour
 {
     AIDestinationSetter AID;
