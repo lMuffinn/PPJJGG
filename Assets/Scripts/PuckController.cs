@@ -118,7 +118,7 @@ public class PuckController : MonoBehaviour
             puck.GetComponent<Collider2D>().isTrigger = false;
             Vector3 dir = Quaternion.AngleAxis(rc.rotation, Vector3.forward) * Vector3.right;
             puck.GetComponent<Rigidbody2D>().AddForce(dir * strength);
-            Debug.Log("shot");
+            //Debug.Log("shot");
         }
         shootTimer -= Time.deltaTime;
     }

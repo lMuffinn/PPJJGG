@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Pathfinding;
 
 public class Score : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class Score : MonoBehaviour
     public GameObject puck;
     public float goalCoolDown = 2;
     float cooldownTimer = 0;
+    public GameObject fadeIn;
+    public List<Transform> enemys;
+    public List<Transform> enemyPositions;
+    public List<Transform> friends;
+    public List<Transform> friendPositions;
 
     // Update is called once per frame
     void Update()
@@ -30,6 +36,7 @@ public class Score : MonoBehaviour
             goalScored = true;
             timer = timeBeforeNextRound;
             cooldownTimer = goalCoolDown;
+            fadeIn.GetComponent<Animator>().SetBool("Scored", true);
         }
         else if ((team2Goal.IsTouchingLayers(puckLayer)) && !goalScored && cooldownTimer < 0)
         {
@@ -37,12 +44,20 @@ public class Score : MonoBehaviour
             goalScored = true;
             timer = timeBeforeNextRound;
             cooldownTimer = goalCoolDown;
+            fadeIn.GetComponent<Animator>().SetBool("Scored", true);
         }
         else if (timer < 0 && goalScored)
         {
+            for (int i = 0; i < enemys.Count; i++)
+            {
+                enemys[i] = enemyPositions[i];
+                friends[i] = friendPositions[i];
+                Debug.Log("moved");
+            }
             puck.GetComponent<Transform>().position = puckStartPosition.position;
             puck.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             goalScored = false;
+            fadeIn.GetComponent<Animator>().SetBool("Scored", false);
         }
         team1Text.GetComponent<TextMeshProUGUI>().text = team1.ToString();
         team2Text.GetComponent<TextMeshProUGUI>().text = team2.ToString();
