@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class Score : MonoBehaviour
     public List<Transform> enemyPositions;
     public List<Transform> friends;
     public List<Transform> friendPositions;
+    public float gameTimer = 300;
+    public TextMeshProUGUI timerText;
 
     // Update is called once per frame
     void Update()
@@ -52,7 +55,7 @@ public class Score : MonoBehaviour
             {
                 enemys[i] = enemyPositions[i];
                 friends[i] = friendPositions[i];
-                Debug.Log("moved");
+                //Debug.Log("moved");
             }
             puck.GetComponent<Transform>().position = puckStartPosition.position;
             puck.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
@@ -63,5 +66,20 @@ public class Score : MonoBehaviour
         team2Text.GetComponent<TextMeshProUGUI>().text = team2.ToString();
         timer -= Time.deltaTime;
         cooldownTimer -= Time.deltaTime;
+        //Debug.Log(team1 > team2);
+        if(gameTimer < 0 && team1 > team2)
+        {
+            SceneManager.LoadScene(4);
+        }
+        if (gameTimer < 0 && team1 > team2)
+        {
+            SceneManager.LoadScene(5);
+        }
+        if (gameTimer < 0 && team1 == team2)
+        {
+            SceneManager.LoadScene(7);
+        }
+        gameTimer -= Time.deltaTime;
+        timerText.text = gameTimer.ToString("F0");
     }
 }

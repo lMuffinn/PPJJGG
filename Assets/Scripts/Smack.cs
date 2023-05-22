@@ -9,6 +9,7 @@ public class Smack : MonoBehaviour
     public LayerMask Enemylayer;
     PuckController pc;
     public List<Transform> enemyTeammates;
+    public Animate anim;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class Smack : MonoBehaviour
     {
         if (smackRange.IsTouchingLayers(Enemylayer) && Input.GetKeyDown(KeyCode.Space) && !pc.hasPuck)
         {
+            anim.Smack();
             GetClosest(enemyTeammates, this.transform).gameObject.GetComponent<EnemyAnger>().Smack();
         }
     }

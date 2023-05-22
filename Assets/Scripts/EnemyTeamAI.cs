@@ -33,7 +33,7 @@ public class EnemyTeamAI : MonoBehaviour
         oldClostest = currentClosest;
         foreach (Transform mate in enemyTeammates)
         {
-            if (!mate.gameObject.GetComponent<SecondNewAI>().closest && mate.gameObject.GetComponent<EnemyAnger>().anger != 0)
+            if (!mate.gameObject.GetComponent<SecondNewAI>().closest && mate.gameObject.GetComponent<EnemyAnger>().anger != 0 && !mate.GetComponent<Caught>().caught)
             {
                 notClosest.Add(mate.gameObject.GetComponent<AIDestinationSetter>());
             }
